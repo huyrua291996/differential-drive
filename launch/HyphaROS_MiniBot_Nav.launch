@@ -5,15 +5,15 @@
     <!-- Launch file parameters -->
     <!-- ********************** -->
     <!-- general -->
-    <arg name="use_rviz"    default="false" />
+    <arg name="use_rviz"    default="true" />
     <arg name="multi_goals" default="false" />
 
     <!-- for nav -->
     <arg name="use_dwa"  default="true" /> 
 
     <!-- for base -->
-    <arg name="wheel_separation" default="0.158" /> <!-- unit: meter -->
-    <arg name="wheel_radius"     default="0.032" /> <!-- unit: meter -->   
+    <arg name="wheel_separation" default="0.132" /> <!-- unit: meter -->
+    <arg name="wheel_radius"     default="0.033" /> <!-- unit: meter -->   
     <arg name="use_imu"          default="false" />
 
     <!-- for amcl -->    
@@ -21,27 +21,28 @@
     <arg name="init_y" default="0.0" />
     <arg name="init_a" default="0.0" />
     <arg name="improved_amcl" default="false" />
-
+    <!--<node pkg="tf" type="static_transform_publisher" name="base_link2odom" args=" 0 0 0.05 0 0 0 /odom /base_link 10"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_link2laser_link"     args="-0.03 0 0.11 0 0 0 /base_link /laser 10"/>-->
 
     <!-- ********************** -->
     <!-- Boot up all components -->
     <!-- ********************** -->
-    <include file="$(find hypharos_minibot)/launch/includes/HyphaROS_MiniBot_Drivers.launch.xml">
+    <!--<include file="$(find hypharos_minibot)/launch/includes/HyphaROS_MiniBot_Drivers.launch.xml">
         <arg name="wheel_separation" value="$(arg wheel_separation)" /> 
         <arg name="wheel_radius"     value="$(arg wheel_radius)" />
         <arg name="use_imu"          value="$(arg use_imu)" />
-    </include>
+    </include>-->
 
 
     <!-- ************ -->
     <!-- Localization -->
     <!-- ************ -->
     <!-- Map server (for amcl) -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find hypharos_minibot)/map/map_amcl.yaml">
+    <node name="map_server" pkg="map_server" type="map_server" args="/home/huy/huy_ws/room.yaml">
         <remap from="map" to="map_amcl"/>
     </node>
     <!-- Map server (for nav)-->
-    <node name="map_server_nav" pkg="map_server" type="map_server" args="$(find hypharos_minibot)/map/map_nav.yaml"/>
+    <node name="map_server_nav" pkg="map_server" type="map_server" args="/home/huy/huy_ws/room.yaml"/>
 
     <!-- amcl -->
     <group unless="$(arg improved_amcl)">

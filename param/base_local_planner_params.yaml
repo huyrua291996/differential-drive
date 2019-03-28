@@ -5,11 +5,11 @@ TrajectoryPlannerROS:
   acc_lim_y: 0.05
 
   #Set the velocity limits of the robot
-  max_vel_x: 0.7
-  min_vel_x: 0.02
-  max_vel_theta: 0.7
-  min_vel_theta: -0.7
-  min_in_place_rotational_vel: 0.6
+  max_vel_x: 0.2
+  min_vel_x: 0.05
+  max_vel_theta: 0.2
+  min_vel_theta: -0.2
+  min_in_place_rotational_vel: 0.2
 
   #The velocity the robot will command when trying to escape from a stuck situation
   escape_vel: -0.1
@@ -35,9 +35,10 @@ TrajectoryPlannerROS:
   heading_scoring: false
   heading_lookahead: 0.1 # meter
   heading_scoring_timestep: 0.5 # secs
-
+  holonomic_robot: false
   #We'll use the Dynamic Window Approach to control instead of Trajectory Rollout for this example
-  dwa: false
+  dwa: true
+  controller_frequency: 3
 
   #How far the robot must travel before oscillation flags are reset
   oscillation_reset_dist: 0.05
